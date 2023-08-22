@@ -11,7 +11,7 @@ class CompanyController extends Controller
 {
     public function index()
     {
-        return CompanyResource::collection(Company::all());
+        return CompanyResource::collection(Company::with('funds')->paginate());
     }
 
     public function store(CompanyRequest $request)

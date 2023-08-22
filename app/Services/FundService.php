@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Http\Requests\FilterFundsRequest;
 use App\Models\Fund;
 use App\Repositories\FundRepository;
-use Illuminate\Database\Eloquent\Builder;
 
 class FundService
 {
@@ -28,5 +27,15 @@ class FundService
     public function getDuplicatedFunds()
     {
         return $this->fundRepository->getDuplicatedFunds();
+    }
+
+    public function createFund(array $data): Fund
+    {
+        return $this->fundRepository->createFund($data);
+    }
+
+    public function updateFund(Fund $fund, array $data): Fund
+    {
+        return $this->fundRepository->updateFund($fund, $data);
     }
 }

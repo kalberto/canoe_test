@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 
 class FundController extends Controller
 {
-    protected $fundService;
+    protected FundService $fundService;
 
     public function __construct(FundService $fundService)
     {
@@ -34,13 +34,7 @@ class FundController extends Controller
 
     public function store(FundRequest $request)
     {
-        $data = $request->validated();
-        $fund = Fund::create($data);
-
-        if (isset($data['aliases'])) {
-            $fund->aliases = $data['aliases'];
-            $fund->save();
-        }
+        $fund = $this->fundService->createFund($request->validated());
 
         return new FundResource($fund);
     }
@@ -52,9 +46,7 @@ class FundController extends Controller
 
     public function update(FundRequest $request, Fund $fund)
     {
-        $fund->update($data = $request->validated());
-        $fund->aliases = $data['aliases'] ?? [];
-        $fund->save();
+        $this->fundService->updateFund($fund, $request->validated());
 
         return new FundResource($fund);
     }

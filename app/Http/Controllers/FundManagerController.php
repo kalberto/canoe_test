@@ -11,7 +11,7 @@ class FundManagerController extends Controller
 {
     public function index()
     {
-        return FundManagerResource::collection(FundManager::all());
+        return FundManagerResource::collection(FundManager::paginate());
     }
 
     public function store(FundManagerRequest $request)

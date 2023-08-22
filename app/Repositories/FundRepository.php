@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Fund;
+use DB;
 use Illuminate\Database\Eloquent\Builder;
 
 class FundRepository
@@ -10,6 +11,7 @@ class FundRepository
     public function getFilteredFunds(?string $name, ?int $manager_id, ?int $year)
     {
         $query = Fund::query()
+            ->with(['aliases', 'companies'])
             ->when($name)
             ->where(function (Builder $query) use ($name) {
                 $input = '%' . $name . '%';
@@ -23,7 +25,7 @@ class FundRepository
             ->when($year)
             ->where('start_year', $year);
 
-        return $query->get();
+        return $query->paginate();
     }
 
     public function findFundDuplicateByNameAndManager(Fund $fund): ?Fund
@@ -47,16 +49,37 @@ class FundRepository
                 ->from('funds as f2')
                 ->whereRaw('f2.id != funds.id')
                 ->where(function ($subQuery) {
-                    $subQuery->where('f2.name', '=', \DB::raw('funds.name'))
+                    $subQuery->where('f2.name', '=', DB::raw('funds.name'))
                         ->orWhereExists(function ($nestedSubQuery) {
                             $nestedSubQuery->selectRaw(1)
                                 ->from('aliases')
                                 ->whereRaw('aliases.fund_id = f2.id')
-                                ->where('aliases.name', '=', \DB::raw('funds.name'));
+                                ->where('aliases.name', '=', DB::raw('funds.name'));
                         });
                 })
                 ->whereRaw('f2.manager_id = funds.manager_id');
         })
-            ->get();
+            ->paginate();
+    }
+
+    public function createFund(array $data): Fund
+    {
+        $fund = Fund::create($data);
+
+        if (isset($data['aliases'])) {
+            $fund->aliases = $data['aliases'];
+            $fund->save();
+        }
+
+        return $fund;
+    }
+
+    public function updateFund(Fund $fund, array $data): Fund
+    {
+        $fund->update($data);
+        $fund->aliases = $data['aliases'] ?? [];
+        $fund->save();
+
+        return $fund;
     }
 }

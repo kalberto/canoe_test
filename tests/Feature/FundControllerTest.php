@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\FundManager;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Tests\TestCase;
