@@ -43,13 +43,26 @@ php artisan key:generate
 
 ## Database & Migration
 
-```Bash
-php artisan migrate
-```
-
 ### ER DIAGRAM
 
 ![ER-Diagram.png](ER-Diagram.png)
+
+### Configuration
+
+Configure your database credentials in the .env file
+````.dotenv
+DB_HOST=127.0.0.1
+DB_PORT=****
+DB_DATABASE=canoe_test
+DB_USERNAME=******
+DB_PASSWORD=******
+````
+
+Run the migrations
+
+```Bash
+php artisan migrate
+```
 
 ## How to serve
 
