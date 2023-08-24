@@ -22,7 +22,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         DuplicateFundWarning::class => [
             HandleDuplicatedFundWarning::class,
-        ]
+        ],
     ];
 
     /**

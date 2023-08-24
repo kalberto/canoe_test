@@ -10,7 +10,7 @@ trait SaveWithSlug
     protected function name(): Attribute
     {
         return Attribute::make(
-            set: static fn($value) => ['slug' => Str::slug($value), 'name' => $value]
+            set: static fn ($value) => ['slug' => Str::slug($value), 'name' => $value]
         );
     }
 }

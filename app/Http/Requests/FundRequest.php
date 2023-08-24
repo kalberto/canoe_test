@@ -12,9 +12,9 @@ class FundRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'min:5', 'max:20'],
             'manager_id' => ['required', 'exists:fund_managers,id'],
-            'start_year' => ['required', 'integer','min:1990', 'max:'.Carbon::now()->year],
+            'start_year' => ['required', 'integer', 'min:1990', 'max:'.Carbon::now()->year],
             'aliases' => ['array', 'nullable'],
-            'aliases.*' => ['required','string', 'min:5', 'max:20'],
+            'aliases.*' => ['required', 'string', 'min:5', 'max:20'],
         ];
     }
 

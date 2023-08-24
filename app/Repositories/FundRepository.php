@@ -14,7 +14,7 @@ class FundRepository
             ->with(['aliases', 'companies'])
             ->when($name)
             ->where(function (Builder $query) use ($name) {
-                $input = '%' . $name . '%';
+                $input = '%'.$name.'%';
                 $query->where('name', 'like', $input)
                     ->orWhereHas('aliases', function ($query) use ($input) {
                         $query->where('name', 'like', $input);

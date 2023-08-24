@@ -43,7 +43,7 @@ php artisan key:generate
 
 ## Docker
 
-This project contains a docker configuration to make it easier to run it.
+This project contains a docker configuration to make it easier to run it. If you don't have docker installed follow the instructions at [Get Docker](https://docs.docker.com/get-docker/).
 
 To run the docker and keep the process open, displaying logs:
 ```bash

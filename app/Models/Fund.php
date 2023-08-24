@@ -37,7 +37,6 @@ class Fund extends Model
         return $this->belongsToMany(Company::class, 'fund_company', 'fund_id', 'company_id');
     }
 
-
     protected function getAliasesAttribute(): array
     {
         return $this->aliases()->pluck('name')->toArray();
@@ -58,7 +57,7 @@ class Fund extends Model
 
         foreach ($aliases as $alias) {
             $this->aliases()->create([
-                'name' => $alias
+                'name' => $alias,
             ]);
         }
     }

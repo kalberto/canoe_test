@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class FilterFundsRequest extends FormRequest
 {
-
     public function authorize(): bool
     {
         return true;
@@ -17,7 +16,7 @@ class FilterFundsRequest extends FormRequest
         return [
             'name' => 'nullable|string|min:5',
             'manager_id' => 'nullable',
-            'year' => 'nullable|integer|min:1990|max:' . now()->year,
+            'year' => 'nullable|integer|min:1990|max:'.now()->year,
         ];
     }
 }

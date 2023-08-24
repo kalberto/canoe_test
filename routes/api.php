@@ -19,13 +19,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('funds/duplicated', [FundController::class, 'getDuplicatedFunds']);
 
 Route::resource('funds', FundController::class)->only([
-    'index', 'store', 'show', 'update', 'destroy'
+    'index', 'store', 'show', 'update', 'destroy',
 ]);
 
 Route::resource('managers', FundManagerController::class)->only([
-    'index', 'store', 'show', 'update', 'destroy'
+    'index', 'store', 'show', 'update', 'destroy',
 ]);
 
 Route::resource('companies', CompanyController::class)->only([
-    'index', 'store', 'show', 'update', 'destroy'
+    'index', 'store', 'show', 'update', 'destroy',
 ]);
