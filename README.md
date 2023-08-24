@@ -106,8 +106,6 @@ Output
 ```
 ## How to serve
 
-### Using `php artisan serve`
-
 If everything went ok, the project should already be running.
 Check localhost
 
