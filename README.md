@@ -23,7 +23,7 @@ php artisan key:generate
 
 This project contains a docker configuration to make it easier to run it.
 
-To run the docker and keep the process open, displaying logs:
+To run the containers and keep the process open, displaying logs:
 ```bash
 docker-compose up
 ```
