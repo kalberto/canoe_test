@@ -41,6 +41,28 @@ cp .env.example .env
 php artisan key:generate
 ```
 
+## Docker
+
+This project contains a docker configuration to make it easier to run it.
+
+To run the docker and keep the process open, displaying logs:
+```bash
+docker-compose up
+```
+
+To run in the background, not displaying logs:
+```bash
+docker-compose up -d
+```
+
+```bash
+docker-compose ps
+NAME                         IMAGE                    COMMAND                  SERVICE             CREATED             STATUS                    PORTS
+canoe-test-canoe.laravel-1   sail-8.1/app             "start-container"        canoe.laravel       xxxxxxxxxxxxxx      xxxxxxxxxxxxxx             0.0.0.0:80->80/tcp, 8000/tcp
+canoe-test-canoe.mysql-1     mysql/mysql-server:8.0   "/entrypoint.sh mysq…"   canoe.mysql         xxxxxxxxxxxxxx      xxxxxxxxxxxxxx (healthy)   0.0.0.0:3306->3306/tcp, 33060-33061/tcp
+canoe-test-canoe.redis-1     redis:alpine             "docker-entrypoint.s…"   canoe.redis         xxxxxxxxxxxxxx      xxxxxxxxxxxxxx             0.0.0.0:6379->6379/tcp
+```
+
 ## Database & Migration
 
 ### ER DIAGRAM
@@ -51,33 +73,43 @@ php artisan key:generate
 
 Configure your database credentials in the .env file
 ````.dotenv
-DB_HOST=127.0.0.1
-DB_PORT=****
 DB_DATABASE=canoe_test
 DB_USERNAME=******
 DB_PASSWORD=******
 ````
 
-Run the migrations
+After the database is running, you need to run:
 
-```Bash
+```bash
+docker exec canoe-test-canoe.laravel-1  /var/www/html/artisan migrate
+``` 
+Or
+```bash
+docker exec -it canoe-test-canoe.laravel-1 bash
+cd /var/www/html
 php artisan migrate
 ```
+Output
+```bash
+   INFO  Preparing database.
 
+  Creating migration table ......................................... 58ms DONE
+
+   INFO  Running migrations.  
+
+  2019_12_14_000001_create_personal_access_tokens_table ............ 70ms DONE
+  2023_08_21_225121_create_companies_table ......................... 16ms DONE
+  2023_08_21_225233_create_fund_managers_table ..................... 29ms DONE
+  2023_08_21_225246_create_funds_table ............................. 94ms DONE
+  2023_08_21_225329_create_aliases_table ........................... 59ms DONE
+  2023_08_21_225352_create_fund_company_table ..................... 115ms DONE
+```
 ## How to serve
 
 ### Using `php artisan serve`
 
-This is the most common way for testing a Laravel application. If you followed the steps above you just need to do the following:
-```Bash
-php artisan serve
-
- INFO  Server running on [http://127.0.0.1:8000];
-```
-
-```Bash
-php artisan queue:work
-```
+If everything went ok, the project should already be running.
+Check localhost
 
 ### Testing
 
