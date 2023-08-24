@@ -4,11 +4,12 @@ namespace App\Repositories;
 
 use App\Models\Fund;
 use DB;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 
 class FundRepository
 {
-    public function getFilteredFunds(?string $name, ?int $manager_id, ?int $year)
+    public function getFilteredFunds(?string $name, ?int $manager_id, ?int $year): LengthAwarePaginator
     {
         $query = Fund::query()
             ->with(['aliases', 'companies'])
@@ -42,7 +43,7 @@ class FundRepository
             ->first();
     }
 
-    public function getDuplicatedFunds()
+    public function getDuplicatedFunds(): LengthAwarePaginator
     {
         return Fund::whereExists(function ($query) {
             $query->selectRaw(1)

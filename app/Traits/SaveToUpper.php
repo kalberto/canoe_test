@@ -4,7 +4,7 @@ namespace App\Traits;
 
 trait SaveToUpper
 {
-    public function setAttribute($key, $value)
+    public function setAttribute($key, $value): void
     {
         parent::setAttribute($key, $value);
 

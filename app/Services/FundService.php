@@ -5,17 +5,18 @@ namespace App\Services;
 use App\Http\Requests\FilterFundsRequest;
 use App\Models\Fund;
 use App\Repositories\FundRepository;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class FundService
 {
-    protected $fundRepository;
+    protected FundRepository $fundRepository;
 
     public function __construct(FundRepository $fundRepository)
     {
         $this->fundRepository = $fundRepository;
     }
 
-    public function getFunds(FilterFundsRequest $request)
+    public function getFunds(FilterFundsRequest $request): LengthAwarePaginator
     {
         $name = $request->get('name');
         $manager_id = $request->get('manager_id');
@@ -24,7 +25,7 @@ class FundService
         return $this->fundRepository->getFilteredFunds($name, $manager_id, $year);
     }
 
-    public function getDuplicatedFunds()
+    public function getDuplicatedFunds(): LengthAwarePaginator
     {
         return $this->fundRepository->getDuplicatedFunds();
     }
