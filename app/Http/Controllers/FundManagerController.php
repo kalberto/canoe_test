@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FundManagerRequest;
 use App\Http\Resources\FundManagerResource;
 use App\Models\FundManager;
-
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;

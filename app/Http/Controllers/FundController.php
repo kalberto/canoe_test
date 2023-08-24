@@ -46,7 +46,7 @@ class FundController extends Controller
         return new FundResource($fund);
     }
 
-    public function update(FundRequest $request, Fund $fund):FundResource
+    public function update(FundRequest $request, Fund $fund): FundResource
     {
         $this->fundService->updateFund($fund, $request->validated());
 
