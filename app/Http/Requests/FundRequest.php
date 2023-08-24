@@ -15,6 +15,8 @@ class FundRequest extends FormRequest
             'start_year' => ['required', 'integer', 'min:1990', 'max:'.Carbon::now()->year],
             'aliases' => ['array', 'nullable'],
             'aliases.*' => ['required', 'string', 'min:5', 'max:20'],
+            'companies' => ['array', 'nullable'],
+            'companies.*' => ['required', 'exists:companies,id'],
         ];
     }
 

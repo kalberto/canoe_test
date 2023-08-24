@@ -115,6 +115,8 @@ Check localhost
 
 This project has a few test for funds
 ```Bash
+docker exec -it canoe-test-canoe.laravel-1 bash
+cd /var/www/html
 php artisan test
 
    PASS  Tests\Feature\FundControllerTest

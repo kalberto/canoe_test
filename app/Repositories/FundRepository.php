@@ -72,6 +72,8 @@ class FundRepository
             $fund->save();
         }
 
+        $fund->companies()->sync($data['companies'] ?? []);
+
         return $fund;
     }
 
@@ -80,6 +82,8 @@ class FundRepository
         $fund->update($data);
         $fund->aliases = $data['aliases'] ?? [];
         $fund->save();
+
+        $fund->companies()->sync($data['companies'] ?? []);
 
         return $fund;
     }

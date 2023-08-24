@@ -2,13 +2,19 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Traits\TestDatabaseSetup;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
 class FundControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use TestDatabaseSetup;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setupTestDatabase();
+    }
 
     public function testCanGetAllFunds()
     {

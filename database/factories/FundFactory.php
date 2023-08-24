@@ -17,8 +17,7 @@ class FundFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $name = $this->faker->name(),
-            //'slug' => Str::slug($name), // TODO check if needed
+            'name' => $this->faker->name(),
             'manager_id' => $this->getFundManagerId(),
             'start_year' => random_int(1990, 2023),
             'created_at' => Carbon::now(),
@@ -36,7 +35,7 @@ class FundFactory extends Factory
 
     private function getFundManagerId(): int
     {
-        if (FundManager::count() > 0) {
+        if (FundManager::exists()) {
             // Get a random FundManager
             $fundManagerId = FundManager::inRandomOrder()->first()->id;
         } else {
@@ -50,7 +49,7 @@ class FundFactory extends Factory
     private function attachCompanies(Fund $fund): void
     {
         // Check if there are any companies in the database
-        if (Company::count() > 0) {
+        if (Company::exists()) {
             // Define how many companies to attach
             $numCompanies = $this->faker->numberBetween(1, 3);
 
